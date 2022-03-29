@@ -3,4 +3,7 @@ export interface CreateTransactionDto {
    readonly transactionValue?: number
    readonly id?: number
    readonly comment?: string
+   readonly idUser: number
+   readonly isIncome: boolean
+   readonly created_a: any
 }

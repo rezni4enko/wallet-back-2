@@ -1,3 +1,4 @@
+import { MyMoneyService } from './../services/MyMoney.service';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateTransactionDto } from 'src/dto/create-transaction.dto';
 import { TransactionService } from 'src/services/transaction.service';
@@ -5,7 +6,8 @@ import { TransactionService } from 'src/services/transaction.service';
 @Controller('transaction')
 export class TransactionController {
 
-   constructor(private transactionService: TransactionService) { }
+   constructor(private transactionService: TransactionService,
+      private myMoneyService: MyMoneyService) { }
 
    @Get()
    getAll() {
@@ -19,7 +21,7 @@ export class TransactionController {
 
    @Post()
    create(@Body() body: CreateTransactionDto) {
-      console.log(body)
+      this.myMoneyService.setMyMoneyValue(body.transactionValue, body.isIncome, body.idUser)
       return this.transactionService.createTransaction(body)
    }
 

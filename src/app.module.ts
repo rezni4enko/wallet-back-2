@@ -1,10 +1,9 @@
+import { MyMoneyEntity } from './entity/myMoney.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ControllerModule } from './controller/controller.module';
 import { TransactionEntity } from './entity/transaction.entity';
-import { ExpensesCategoryEntity } from './entity/expensesCategory.entity';
-import { IncomeCategoryEntity } from './entity/incomeCategory.entity';
-
+import { TransactionCategoryEntity } from './entity/transactionCategory.entity';
 
 @Module({
   controllers: [],
@@ -13,11 +12,11 @@ import { IncomeCategoryEntity } from './entity/incomeCategory.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 3002,
       username: 'postgres',
       password: '8836612',
       database: 'transaction1',
-      entities: [TransactionEntity, ExpensesCategoryEntity, IncomeCategoryEntity],
+      entities: [TransactionEntity, TransactionCategoryEntity, MyMoneyEntity],
       logging: true,
       synchronize: true,
     }),

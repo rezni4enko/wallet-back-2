@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'transaction' })
 export class TransactionEntity extends BaseEntity {
@@ -14,11 +14,12 @@ export class TransactionEntity extends BaseEntity {
    @Column()
    transactionValue?: number;
 
-   // constructor(comment: string, transactionCategory: string, id?: number, transactionValue?: number) {
-   //    super();
-   //    this.id = id;
-   //    this.comment = comment;
-   //    this.transactionCategory = transactionCategory;
-   //    this.transactionValue = transactionValue
-   // }
+   @Column()
+   isIncome?: boolean;
+
+   @Column()
+   idUser?: number;
+
+   @CreateDateColumn()
+   created_at: Date;
 }

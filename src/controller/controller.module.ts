@@ -1,24 +1,25 @@
+import { MyMoneyService } from './../services/MyMoney.service';
+import { MyMoneyController } from './myMoney.controller';
+import { MyMoneyRepository } from './../services/myMoney.repositary';
+import { MyMoneyEntity } from './../entity/myMoney.entity';
+import { TransactionCategoryService } from './../services/transactionCategory.service';
+import { TransactionCategoryRepository } from './../services/transactionCategory.repositary';
+import { TransactionCategoryEntity } from './../entity/transactionCategory.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionEntity } from 'src/entity/transaction.entity';
-import { ExpensesCategoryEntity } from 'src/entity/expensesCategory.entity';
 import { TransactionRepository } from 'src/services/transaction.repositary';
 import { TransactionService } from 'src/services/transaction.service';
-import { ExpensesCategoryRepository } from 'src/services/expensesCategory.repositary';
-import { ExpensesCategoryService } from 'src/services/expensesCategory.service';
 import { TransactionController } from './transaction.controller';
-import { ExpensesCategoryController } from './expensesCategory.controller';
-import { IncomeCategoryController } from './incomeCategory.controller';
-import { IncomeCategoryService } from 'src/services/incomeCategory.service';
-import { IncomeCategoryEntity } from 'src/entity/incomeCategory.entity';
-import { IncomeCategoryRepository } from 'src/services/incomeCategory.repositary';
-
+import { TransactionCategoryController } from './transactionCategory.controller';
 
 @Module({
    imports: [
-      TypeOrmModule.forFeature([TransactionEntity, TransactionRepository, ExpensesCategoryEntity, ExpensesCategoryRepository, IncomeCategoryEntity, IncomeCategoryRepository]),
+      TypeOrmModule.forFeature([TransactionEntity, TransactionRepository,
+         TransactionCategoryEntity, TransactionCategoryRepository,
+         MyMoneyEntity, MyMoneyRepository]),
    ],
-   controllers: [TransactionController, ExpensesCategoryController, IncomeCategoryController],
-   providers: [TransactionService, ExpensesCategoryService, IncomeCategoryService]
+   controllers: [TransactionController, TransactionCategoryController, MyMoneyController],
+   providers: [TransactionService, TransactionCategoryService, MyMoneyService]
 })
 export class ControllerModule { }

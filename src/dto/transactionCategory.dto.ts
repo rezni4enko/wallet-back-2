@@ -1,4 +1,4 @@
-export interface ExpensesCategoryDto {
+export interface TransactionCategoryDto {
    readonly transactionCategory: string
    readonly isIncome: boolean
    readonly id?: number
