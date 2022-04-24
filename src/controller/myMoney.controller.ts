@@ -21,9 +21,4 @@ export class MyMoneyController {
    create(@Body() body: CreateTransactionDto) {
       return this.myMoneyService.create(body)
    }
-
-   @Delete(':id')
-   async delete(@Param('id') id: number) {
-      this.myMoneyService.delete(id);
-   }
 }

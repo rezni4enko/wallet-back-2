@@ -12,7 +12,7 @@ import { TransactionCategoryEntity } from './entity/transactionCategory.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 3002,
+      port: 5432,
       username: 'postgres',
       password: '8836612',
       database: 'transaction1',

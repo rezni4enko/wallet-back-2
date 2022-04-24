@@ -22,11 +22,14 @@ export class TransactionController {
    @Post()
    create(@Body() body: CreateTransactionDto) {
       this.myMoneyService.setMyMoneyValue(body.transactionValue, body.isIncome, body.idUser)
+      console.log(body)
       return this.transactionService.createTransaction(body)
    }
 
    @Delete(':id')
    async delete(@Param('id') id: number) {
+      const transaction = await this.transactionService.getOneTransactions(id)
+      this.myMoneyService.updateMyMoneyValue(transaction[0].transactionValue, transaction[0].isIncome, transaction[0].idUser)
       this.transactionService.deleteTransaction(id);
    }
 }

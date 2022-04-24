@@ -5,7 +5,9 @@ export class MyMoneyEntity extends BaseEntity {
    @PrimaryGeneratedColumn()
    id?: number;
 
-   @Column()
+   @Column({
+      type: 'int'
+   })
    money?: number;
 
    @Column()
@@ -13,5 +15,5 @@ export class MyMoneyEntity extends BaseEntity {
 
    @CreateDateColumn()
 
-   created_at: Date;
+   created_at: Date
 }

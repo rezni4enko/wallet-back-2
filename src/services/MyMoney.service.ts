@@ -22,14 +22,18 @@ export class MyMoneyService {
       return myMoney
    }
 
-   async delete(id: number) {
-      return await this.myMoneyRepository.delete({ id })
-   }
-
    async setMyMoneyValue(transactionValue: number, isIncome: boolean, idUser: number) {
       if (isIncome) {
          let myMoney = await this.myMoneyRepository.getLastValueMyMoney(idUser)
-         myMoney = myMoney[myMoney.length - 1].money - transactionValue
+         if (myMoney.length === 0) {
+            this.myMoneyRepository.save({
+               money: transactionValue * (-1),
+               idUser: idUser
+            })
+
+         }
+         myMoney = +myMoney[myMoney.length - 1].money - transactionValue
+         console.log(myMoney)
          return await this.myMoneyRepository.save({
             money: myMoney,
             idUser: idUser
@@ -37,7 +41,31 @@ export class MyMoneyService {
       }
       else {
          let myMoney = await this.myMoneyRepository.getLastValueMyMoney(idUser)
+         if (myMoney.length === 0) this.myMoneyRepository.save({
+            money: transactionValue,
+            idUser: idUser
+         })
+         myMoney = myMoney[myMoney.length - 1].money + Number(transactionValue)
+         return await this.myMoneyRepository.save({
+            money: myMoney,
+            idUser: idUser
+         })
+      }
+   }
+
+
+   async updateMyMoneyValue(transactionValue: number, isIncome: boolean, idUser: number) {
+      if (isIncome) {
+         let myMoney = await this.myMoneyRepository.getLastValueMyMoney(idUser)
          myMoney = +myMoney[myMoney.length - 1].money + transactionValue
+         return await this.myMoneyRepository.save({
+            money: myMoney,
+            idUser: idUser
+         })
+      }
+      else {
+         let myMoney = await this.myMoneyRepository.getLastValueMyMoney(idUser)
+         myMoney = +myMoney[myMoney.length - 1].money - transactionValue
          return await this.myMoneyRepository.save({
             money: myMoney,
             idUser: idUser
